@@ -1,4 +1,4 @@
-package yandex
+package yandex.algorithms
 
 fun main() {
     val binary = readLine()!!

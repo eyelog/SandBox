@@ -1,4 +1,4 @@
-package yandex
+package yandex.algorithms
 
 fun main() {
     val inData = "4356183154682"
