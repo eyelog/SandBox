@@ -1,4 +1,4 @@
-package yandex
+package yandex.jewels
 
 fun main(args: Array<String>) {
     val j = readLine()!!

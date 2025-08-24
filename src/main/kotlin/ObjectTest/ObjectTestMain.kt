@@ -1,5 +1,6 @@
 package ObjectTest
 
 fun main() {
-    println(ObjectTest.a)
+    val classTest = ClassTest()
+    println(classTest.a)
 }

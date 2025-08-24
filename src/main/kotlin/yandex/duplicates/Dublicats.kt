@@ -1,4 +1,4 @@
-package yandex
+package yandex.duplicates
 
 fun main() {
     val inData = "4356183154682"

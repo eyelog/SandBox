@@ -1,4 +1,4 @@
-package yandex
+package yandex.anagram
 
 fun main() {
 

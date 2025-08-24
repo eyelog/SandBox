@@ -1,0 +1,63 @@
+// Нужно написать мини-библиотеку, которая будет загружать картинки по переданному url и отображать их в ImageView
+// Если одновременно попытались загрузить две картинки с одинаковым url, то в сеть нужно ходить один раз.
+
+// Fragment
+@Inject
+lateinit var imageLoader
+
+fun onViewCreated(...) {
+    ...
+    val imageView: ImageView...
+    val imageView2: ImageView...
+    val url: Uri = ...
+
+    val imageView3: ImageView...
+    val url3: Uri = ...
+
+    // Пример использования
+    imageLoader.getImageFromUri(url)
+    imageLoader.imageLiveData(lifeCycleOwner, { image ->
+        imageView.setImage(image)
+    })
+
+    imageLoader.getImageFromUri(url)
+    imageLoader.imageLiveData(lifeCycleOwner, { image ->
+        imageView2.setImage(image)
+    })
+
+
+    imageLoader.getImageFromUri(url3)
+    imageLoader.imageLiveData(lifeCycleOwner, { image ->
+        imageView3.setImage(image)
+    })
+}
+
+
+// Реализация библиотеки
+class ImageLoader(){
+
+    val imageLiveData = LiveData<Bitmap>()
+    val _imageLiveData = MutableLiveData<Bitmap>() get{imageLiveData}
+    val imageLoader: Bitmap = getImageLoder()
+
+    val imageStore = HashMap<Uri, Bitmap>()
+
+    fun getImageFromUri(url: Uri) {
+
+        if(imageStore.containsKey(url)){
+            _imageLiveData.post(imageStore[url])
+        } else {
+            _imageLiveData.post(imageLoader)
+            GlobalScope(Dispatchers.IO) {
+                val tempBitmap = createBitmap(loadBytes(url))
+                imageStore.put(url, tempBitmap)
+                _imageLiveData.post(tempBitmap)
+            }
+        }
+    }
+}
+
+// Утилиты:
+@WorkerThread
+fun loadBytes(url: Uri): ByteArray
+fun createBitmap(byteArray: ByteArray): Bitmap

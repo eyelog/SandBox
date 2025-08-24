@@ -2,7 +2,7 @@ public class BracesForceWorks {
 
     public static void main(String[] args) {
 
-        int n = 8;
+        int n = 6;
 
         if (n < 2) return;
         char[] chrs = new char[n];
@@ -26,6 +26,7 @@ public class BracesForceWorks {
             chrs[i++] = ')';
             int ind = i;
             for (; i < n; i++) {
+                System.out.println(i);
                 chrs[i] = (i<= (n-ind+c)/2+ind) ? '(' : ')';
             }
             System.out.println(chrs);
