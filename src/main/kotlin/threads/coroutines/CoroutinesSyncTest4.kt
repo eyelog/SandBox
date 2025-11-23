@@ -1,3 +1,5 @@
+package threads.coroutines
+
 import kotlinx.coroutines.*
 
 fun main() {

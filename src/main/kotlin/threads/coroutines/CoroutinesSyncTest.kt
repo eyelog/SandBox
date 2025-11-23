@@ -1,3 +1,5 @@
+package threads.coroutines
+
 import kotlin.concurrent.thread
 
 fun main() {
